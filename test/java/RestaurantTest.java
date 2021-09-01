@@ -13,7 +13,7 @@ class RestaurantTest {
     public void beforeEach()
     {
         LocalTime openingTime = LocalTime.parse("10:30:00");
-        LocalTime closingTime = LocalTime.parse("22:00:00");
+        LocalTime closingTime = LocalTime.parse("23:59:00");
         restaurant = restaurantService.addRestaurant("Amelie's cafe","Chennai",openingTime,closingTime);
         restaurant.addToMenu("Sweet corn soup",119);
         restaurant.addToMenu("Vegetable lasagne", 269);
@@ -33,8 +33,10 @@ class RestaurantTest {
 
     @Test
     public void is_restaurant_open_should_return_false_if_time_is_outside_opening_and_closing_time() throws restaurantNotFoundException {
-        String searchedRestaurantName="Amelie's cafe";
-
+        LocalTime openingTime = LocalTime.parse("01:30:00");
+        LocalTime closingTime = LocalTime.parse("08:00:00");
+        restaurant = restaurantService.addRestaurant("Behroz","Pune",openingTime,closingTime);
+        String searchedRestaurantName="Behroz";
         assertFalse(restaurantService.findRestaurantByName(searchedRestaurantName).isRestaurantOpen());
 
 
