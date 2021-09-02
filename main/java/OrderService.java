@@ -25,8 +25,10 @@ public class OrderService {
     }
     public int getOrderValue()
     {
-
-        return 0;
+        for (Item temp: order) {
+            orderValue += temp.getPrice();
+        }
+        return orderValue;
     }
 
     public static List<Item> getOrder() {
